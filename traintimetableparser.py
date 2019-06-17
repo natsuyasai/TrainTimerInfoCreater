@@ -143,8 +143,10 @@ def main(args):
     train_time_info = TrainTimeInfo()
     result_list = train_time_info.get_time_info(args[1])
     # ファイル出力
-    with open('result.txt', mode='w', encoding='utf-8') as resultfile:
+    with open('result.txt', mode='a', encoding='utf-8') as resultfile:
+        resultfile.write("------------------------------------------------------------------\n")
         resultfile.writelines(result_list)
+        resultfile.write("------------------------------------------------------------------\n")
 
 
 if __name__ == "__main__":
