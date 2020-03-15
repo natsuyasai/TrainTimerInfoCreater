@@ -3,7 +3,8 @@
 公開の終了したTrainTimerというandroidアプリ用の時刻表データをYahooから取得し，生成するスクリプト
 
 ## 使い方
-1．以下通りに実行し，時刻表データを取得する(平日，土曜，日曜祝日)
+1．以下通りに実行し，時刻表データを取得する(平日，土曜，日曜祝日)  
+※URLはダブルクオーテーションでくくること
 ```
 # URL例:https://transit.yahoo.co.jp/station/time/25853/?kind=4&gid=1770&q=%E5%A4%A7%E9%98%AA&tab=time
 python traintimetableparser.py "URL"
