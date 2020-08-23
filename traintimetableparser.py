@@ -141,12 +141,34 @@ def main(args):
         print("URLを指定してください")
         return 
     train_time_info = TrainTimeInfo()
-    result_list = train_time_info.get_time_info(args[1])
-    # ファイル出力
-    with open('result.txt', mode='a', encoding='utf-8') as resultfile:
-        resultfile.write("------------------------------------------------------------------\n")
-        resultfile.writelines(result_list)
-        resultfile.write("------------------------------------------------------------------\n")
+    if len(args) > 2 and args[2] == "auto":
+        baseurl = args[1]
+        for i in range(3):
+            # URL更新
+            kind = i + 1 if i != 2 else i + 2  # 日曜・祝日のみkindが3ではなく4となる
+            kindpos = baseurl.find("kind=")
+            baseurl = baseurl[:kindpos] + f"kind={kind}" + baseurl[kindpos+6:]
+            print(baseurl)
+            result_list = train_time_info.get_time_info(baseurl)
+            # ファイル出力
+            with open('result.txt', mode='a', encoding='utf-8') as resultfile:
+                if i == 0:
+                    resultfile.write(f"URL={baseurl}\n")
+                    resultfile.write("[平日]\n")
+                elif i == 1:
+                    resultfile.write("[土曜]\n")
+                else:
+                    resultfile.write("[日曜・祝日]\n")
+                resultfile.writelines(result_list)
+    else:
+        result_list = train_time_info.get_time_info(args[1])
+        # ファイル出力
+        with open('result.txt', mode='a', encoding='utf-8') as resultfile:
+            resultfile.write(
+                "------------------------------------------------------------------\n")
+            resultfile.writelines(result_list)
+            resultfile.write(
+                "------------------------------------------------------------------\n")
 
 
 if __name__ == "__main__":

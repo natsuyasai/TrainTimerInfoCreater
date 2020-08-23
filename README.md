@@ -4,12 +4,15 @@
 
 ## 使い方
 1．以下通りに実行し，時刻表データを取得する(平日，土曜，日曜祝日)  
+最後に「auto」をつけた場合は手順2が不要となるよう生成します  
+ただしURLが想定外の仕様であった場合は正しく取得できないため，手動で平日，土曜，日曜祝日分を取得し，手順2を実施してください
 ※URLはダブルクオーテーションでくくること
 ```
 # URL例:https://transit.yahoo.co.jp/station/time/25853/?kind=4&gid=1770&q=%E5%A4%A7%E9%98%AA&tab=time
-python traintimetableparser.py "URL"
+python traintimetableparser.py "URL" auto
 ```
-2．result.xtにtraintimerの.dat形式の時刻表が出力されるため，以下フォーマットにし，連番.datとして保存する
+2．result.xtにtraintimerの.dat形式の時刻表が出力されるため，以下フォーマットにし，連番.datとして保存する  
+※手順1で「atuo」を使用した場合は不要です
 ```
 URL=平日の時刻表データのURL
 [平日]
@@ -20,7 +23,7 @@ HH:MM,普通,××,
 HH:MM,普通,××,
 ```
 
-3．アプリの設定よりバックアップを作成  
+3．TrainTimerのアプリの設定よりバックアップを作成  
 4．バックアップに本スクリプトを用いて生成した情報を入れ込んだデータを生成する  
 4-1．traintimer.zipを解凍  
 4-2．今回作成したファイルを既にある連番以降の番号名としておく  
